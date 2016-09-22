@@ -4,6 +4,8 @@
 import email
 import os.path
 
+import HtmlExtractor.HtmlExtractor
+
 # regular expression
 REG_TABLE = re.compile(r'<table.*?>.*?</table>', re.M | re.I | re.S)
 REG_TR = re.compile(r'<tr.*?>.*?</tr>', re.M | re.I | re.S)
@@ -27,7 +29,7 @@ class EmailExtractor(object):
 			file.close()
 		return html
 		
-	def read(self):
+	def extract(self):
 		html = self.__get_html()
 		html_tables = REG_TABLE.findall(html)
 		
@@ -35,4 +37,4 @@ class EmailExtractor(object):
 if __name__ == "__main__":
 	filepath = os.path.abspath(r"..\..\test\read_test\data\test.eml")
 	ee = EmailExtractor(filepath)
-	print(ee.read())
+	print(ee.extract())
