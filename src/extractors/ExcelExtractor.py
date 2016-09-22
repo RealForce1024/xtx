@@ -24,7 +24,8 @@ class ExcelExtractor(object):
 			if not targetSheetIndex is None:
 				ws = wb.sheet_by_index(targetSheetIndex)
 			else:
-				raise ValueError("The targetSheet arguments must be specified one:  targetSheetIndex=%s, targetSheetName=%s" % (targetSheetIndex, targetSheetName))
+				raise ValueError("The targetSheet arguments must be specified one:  targetSheetIndex=%s, targetSheetName=%s" % \
+					(targetSheetIndex, targetSheetName))
 
 		# get cell data
 		for rowIndex in range(0, ws.nrows):
@@ -54,7 +55,8 @@ class ExcelExtractor(object):
 			if not targetSheetIndex is None:
 				ws = wb.get_sheet_by_name(wb.get_sheet_names()[targetSheetIndex])
 			else:
-				raise ValueError("The targetSheet arguments must be specified one:  targetSheetIndex=%s, targetSheetName=%s" % (targetSheetIndex, targetSheetName))
+				raise ValueError("The targetSheet arguments must be specified one:  targetSheetIndex=%s, targetSheetName=%s" % \
+					(targetSheetIndex, targetSheetName))
 		
 		# get cell data
 		for rowNum in range(1, ws.max_row + 1):
