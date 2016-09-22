@@ -31,4 +31,27 @@ class HtmlExtractor(object):
 
 		tableContents = REG_TABLE.findall(htmlContent)
 		for tableContent in tableContents:
-			
+			trContents = REG_TR.findall(tableContent)
+
+if __name__ == "__main__":
+	htmlContent = "\
+		<html>\
+			<head><title></title></head>\
+			<body>\
+				<table>\
+					<thead><tr><th>名称</th><th>年龄</th></tr></thead>\
+					<tbody>\
+						<tr><td>张三</td><td>22</td></tr>\
+						<tr><td>李四</td><td>33</td></tr>\
+					</tbody>\
+				</table>\
+				<table>\
+					<tr><th><span>名称</span></th><th><span>性别</span></th></tr>\
+					<tr><td>张三</td><td>男</td></tr>\
+					<tr><td>李四</td><td>女</td></tr>\
+				</table>\
+			</body>\
+		</html>"
+	tables = REG_TABLE.findall(htmlContent)
+	for table in tables:
+		print(table)
