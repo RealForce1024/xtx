@@ -6,18 +6,11 @@ import os.path
 
 import HtmlExtractor.HtmlExtractor
 
-# regular expression
-REG_TABLE = re.compile(r'<table.*?>.*?</table>', re.M | re.I | re.S)
-REG_TR = re.compile(r'<tr.*?>.*?</tr>', re.M | re.I | re.S)
-REG_TD = re.compile(r'<td.*?>.*?</td>', re.M | re.I | re.S)
-REG_TD_VAL = re.compile(r'<td.*>(.*)</td>')
-REG_H3 = re.compile(r'<h3.*?>.*?</h3>', re.M | re.I | re.S)
-
 class EmailExtractor(object):
-	
+
 	def __init__(self, srcPath):
 		self.srcPath = srcPath
-		
+
 	def __get_html(self):
 		html = None
 		with open(self.srcPath, encoding="UTF-8") as file:
@@ -28,12 +21,12 @@ class EmailExtractor(object):
 					html = r.decode("UTF8")
 			file.close()
 		return html
-		
+
 	def extract(self):
 		html = self.__get_html()
 		html_tables = REG_TABLE.findall(html)
-		
-		
+
+
 if __name__ == "__main__":
 	filepath = os.path.abspath(r"..\..\test\read_test\data\test.eml")
 	ee = EmailExtractor(filepath)
