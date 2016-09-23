@@ -7,32 +7,12 @@ import pandas as pd
 from html.parser import HTMLParser
 #from HTMLParser import HTMLParser
 
-# regular expression
-REG_TABLE = re.compile(r'<table.*?>.*?</table>', re.M | re.I | re.S)
-REG_TR = re.compile(r'<tr.*?>.*?</tr>', re.M | re.I | re.S)
-REG_TD = re.compile(r'<td.*?>.*?</td>', re.M | re.I | re.S)
-REG_TD_VAL = re.compile(r'<td.*>(.*)</td>')
-REG_TH = re.compile(r'<th.*?>.*?</th>', re.M | re.I | re.S)
-REG_TH_VAL = re.compile(r'<th.*>(.*)</th>')
-REG_H3 = re.compile(r'<h3.*?>.*?</h3>', re.M | re.I | re.S)
 
 class HtmlExtractor(object):
 
 	def __init__(self):
 		pass
 
-	def __extract_by_regexp(self, htmlContent):
-		tableHtmls = REG_TABLE.findall(htmlContent)
-		for tableHtml in tableHtmls:
-			trHtmls = REG_TR.findall(tableHtml)
-			for trHtml in trHtmls:
-				thHtmls = REG_TH.findall(trHtml)
-				tdHtmls = REG_TD.findall(trHtml)
-				for thHtml in thHtmls:
-					pass
-
-				for tdHtml in tdHtmls:
-					pass
 
 	def extract(self, filepath = None, content = None):
 		htmlContent = None
@@ -45,12 +25,43 @@ class HtmlExtractor(object):
 				raise ValueError("The follow arguments must be specified one:  filepath=%s, content=%s" % \
 					(filepath, content))
 
-		htmlParser = __MyHtmlParser()
+		htmlParser = SimpleHtmlParser()
 		htmlParser.feed(htmlContent)
 		tablesData = htmlParser.getTables()
+		print(tablesData)
+		return pd.Panel(data = tablesData)
 
 
-class __MyHtmlParser(HTMLParser):
+
+class RegExpHtmlParser(object):
+
+	# regular expression
+	REG_TABLE = re.compile(r'<table.*?>.*?</table>', re.M | re.I | re.S)
+	REG_TR = re.compile(r'<tr.*?>.*?</tr>', re.M | re.I | re.S)
+	REG_TD = re.compile(r'<td.*?>.*?</td>', re.M | re.I | re.S)
+	REG_TD_VAL = re.compile(r'<td.*>(.*)</td>')
+	REG_TH = re.compile(r'<th.*?>.*?</th>', re.M | re.I | re.S)
+	REG_TH_VAL = re.compile(r'<th.*>(.*)</th>')
+	REG_H3 = re.compile(r'<h3.*?>.*?</h3>', re.M | re.I | re.S)
+
+	def __init__(self):
+		pass
+
+	def parse(self, htmlContent):
+		tableHtmls = RegExpHtmlParser.REG_TABLE.findall(htmlContent)
+		for tableHtml in tableHtmls:
+			trHtmls = RegExpHtmlParser.REG_TR.findall(tableHtml)
+			for trHtml in trHtmls:
+				thHtmls = RegExpHtmlParser.REG_TH.findall(trHtml)
+				tdHtmls = RegExpHtmlParser.REG_TD.findall(trHtml)
+				for thHtml in thHtmls:
+					pass
+
+				for tdHtml in tdHtmls:
+					pass
+
+
+class SimpleHtmlParser(HTMLParser):
 
 	def __init__(self):
 		super().__init__()
@@ -86,6 +97,8 @@ class __MyHtmlParser(HTMLParser):
 	def getTables(self):
 		return self.__tables
 
+
+
 if __name__ == "__main__":
 	htmlContent = "\
 		<html>\
@@ -105,7 +118,11 @@ if __name__ == "__main__":
 				</table>\
 			</body>\
 		</html>"
-	parser = __MyHtmlParser()
+	parser = SimpleHtmlParser()
 	parser.feed(htmlContent)
 	data = parser.getTables()
 	print(data)
+
+	etr = HtmlExtractor()
+	panel = etr.extract(content = htmlContent)
+	print(panel)

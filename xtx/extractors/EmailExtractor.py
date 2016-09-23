@@ -4,7 +4,7 @@
 import email
 import os.path
 
-import HtmlExtractor.HtmlExtractor
+import HtmlExtractor as he
 
 class EmailExtractor(object):
 
@@ -24,10 +24,13 @@ class EmailExtractor(object):
 
 	def extract(self):
 		html = self.__get_html()
-		html_tables = REG_TABLE.findall(html)
+		print(html)
+		htmlEtr = he.HtmlExtractor()
+		return htmlEtr.extract(content = html)
+
 
 
 if __name__ == "__main__":
-	filepath = os.path.abspath(r"..\..\test\read_test\data\test.eml")
+	filepath = os.path.abspath(r"../../test/read_test/data/test.eml")
 	ee = EmailExtractor(filepath)
 	print(ee.extract())
