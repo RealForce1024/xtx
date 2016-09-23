@@ -4,7 +4,8 @@
 import os.path
 import re
 import pandas as pd
-from HTMLParser import HTMLParser
+from html.parser import HTMLParser
+#from HTMLParser import HTMLParser
 
 # regular expression
 REG_TABLE = re.compile(r'<table.*?>.*?</table>', re.M | re.I | re.S)
@@ -20,20 +21,7 @@ class HtmlExtractor(object):
 	def __init__(self):
 		pass
 
-
-
-	def extract(self, filepath = None, content = None):
-		htmlContent = None
-		if not content is None:
-			htmlContent = content
-		else:
-			if not filepath is None:
-				 htmlContent = open(filepath, 'r')
-			else:
-				raise ValueError("The follow arguments must be specified one:  filepath=%s, content=%s" % \
-					(filepath, content))
-
-
+	def __extract_by_regexp(self, htmlContent):
 		tableHtmls = REG_TABLE.findall(htmlContent)
 		for tableHtml in tableHtmls:
 			trHtmls = REG_TR.findall(tableHtml)
@@ -46,32 +34,55 @@ class HtmlExtractor(object):
 				for tdHtml in tdHtmls:
 					pass
 
+	def extract(self, filepath = None, content = None):
+		htmlContent = None
+		if not content is None:
+			htmlContent = content
+		else:
+			if not filepath is None:
+				 htmlContent = open(filepath, 'r')
+			else:
+				raise ValueError("The follow arguments must be specified one:  filepath=%s, content=%s" % \
+					(filepath, content))
+
+		htmlParser = __MyHtmlParser()
+		htmlParser.feed(htmlContent)
+		tablesData = htmlParser.getTables()
+
+
 class __MyHtmlParser(HTMLParser):
 
-
-	tables = []
-	table = []
-	row = []
+	def __init__(self):
+		super().__init__()
+		self.__tables = []
+		self.__table = []
+		self.__row = []
 
 	def handle_starttag(self, tag, attrs):
 		if tag == "table":
-			pass
+			self.__table = []
 		elif tag == "tr":
-			pass
+			self.__row = []
 		elif tag == "th" or tag == "td":
+			pass
+		else:
 			pass
 
 	def handle_endtag(self, tag):
 		if tag == "table":
-			pass
+			self.__tables.append(self.__table)
 		elif tag == "tr":
-			pass
+			self.__table.append(self.__row)
 		elif tag == "th" or tag == "td":
+			pass
+		else:
 			pass
 
 	def handle_data(self, data):
-		pass
+		self.__row.append(data)
 
+	def getTables(self):
+		return self.__tables
 
 if __name__ == "__main__":
 	htmlContent = "\
@@ -92,6 +103,7 @@ if __name__ == "__main__":
 				</table>\
 			</body>\
 		</html>"
-	tables = REG_TABLE.findall(htmlContent)
-	for table in tables:
-		print(table)
+	parser = __MyHtmlParser()
+	parser.feed(htmlContent)
+	data = parser.getTables()
+	print(data)
