@@ -57,6 +57,7 @@ class __MyHtmlParser(HTMLParser):
 		self.__tables = []
 		self.__table = []
 		self.__row = []
+		self.__appenddata = False
 
 	def handle_starttag(self, tag, attrs):
 		if tag == "table":
@@ -64,7 +65,7 @@ class __MyHtmlParser(HTMLParser):
 		elif tag == "tr":
 			self.__row = []
 		elif tag == "th" or tag == "td":
-			pass
+			self.__appenddata = True
 		else:
 			pass
 
@@ -74,12 +75,13 @@ class __MyHtmlParser(HTMLParser):
 		elif tag == "tr":
 			self.__table.append(self.__row)
 		elif tag == "th" or tag == "td":
-			pass
+			self.__appenddata = False
 		else:
 			pass
 
 	def handle_data(self, data):
-		self.__row.append(data)
+		if self.__appenddata == True:
+			self.__row.append(data.strip())
 
 	def getTables(self):
 		return self.__tables
