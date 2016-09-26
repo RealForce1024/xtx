@@ -3,6 +3,7 @@
 
 import unittest
 
+
 class SimpleFlowTest(unittest.TestCase):
 	def setUp(self):
 		pass
@@ -10,13 +11,18 @@ class SimpleFlowTest(unittest.TestCase):
 	def tearDown(self):
 		pass
 		
-	def from_eml_to_excel(self):
-		self.assertEqual(1, 2)
+	def test_from_excel_to_postgres(self):
+		file_path = ""
+		db_url = ""
+		db_username = ""
+		db_userpwd = ""
+		
+		# self.assertEqual(1, 2)
 		
 
 def suite():
 	suite = unittest.TestSuite()
-	suite.addTest(SimpleFlowTest("from_eml_to_excel"))
+	suite.addTest(SimpleFlowTest("test_from_excel_to_postgres"))
 	return suite
 	
 if __name__ == "__main__":
