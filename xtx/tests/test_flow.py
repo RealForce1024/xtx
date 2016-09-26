@@ -25,7 +25,7 @@ class SimpleFlowTest(unittest.TestCase):
 			, Rule(column = "用户数", type = Types.Integer, targetField = "usersCount", emptyHandler, unmatchHandler)
 			, Rule(column = "卡数", type = Types.Integer, targetField = "cardsCount", emptyHandler, unmatchHandler)
 		]
-		loader = Loader(data = dat ,rules = rules)
+		loader = Loader(data = dat ,rules = rules, recreateSchema = True)
 		# self.assertEqual(1, 2)
 		
 
