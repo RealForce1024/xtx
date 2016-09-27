@@ -1,84 +1,55 @@
 #!/usr/bin/env python
 # -*- coding: utf-8  -*-
 
-class Student(object):
-	
-	# public class fields
-	name = "zhangsan"
-	
-	# private class fields
-	__sex = "boy"
-	
-	def __init__(self):
-		# public instance fields
-		self.age = 99
-		# private instance fields
-		self.__addr = "BEIJING"
-	
-	# private instance method
-	def __setAge(self, age):
-		self.age = age
-	
-	# public instance method
-	def getName(self):
-		return Student.name
+import unittest
+
+from sqlalchemy import create_engine
+
+
+
+class SqlAlchemyTest(unittest.TestCase):
+
+	def setUp(self):
+		pass
 		
-	def getSex(self):
-		return Student.__sex
-	
-	def getAge(self):
-		return self.age
+	def tearDown(self):
+		pass
 		
-	def getAddr(self):
-		return self.__addr;
-	
-	# property getter
-	@property
-	def addr(self):
-		return self.__addr
-	
-	# property setter
-	@addr.setter
-	def addr(self, address):
-		self.__addr = address
+	def test_pygresql(self):
+		import pg
 		
-	@staticmethod
-	def sayHi():
-		# a = self.age
-		print("hi!")
-	
-	@classmethod
-	def sayGood(cls):
-		# a = self.age
-		print(cls.name)
-		print("Good!")
+		conn = pg.connect(dbname = 'jingdongdw', host = '10.13.40.16', user = 'jingdongdwadmin', passwd = 'jingdongdwadmin.') 
+		sql_select = "select * from jd_sys.base_users"
+		users = conn.query(sql_select).dictresult()
+		self.assertTrue(len(users) > 0)
+		for row in users:
+			print(row)
+			
+	def test_sqlalchemy_psycopg2(self):
+		db_url = "postgresql+psycopg2://jingdongdwadmin:jingdongdwadmin.@10.13.40.16:5432/jingdongdw"
+
+		engine = create_engine(db_url, echo=True)
+
+		connection = engine.connect()
 		
+		result = connection.execute("select * from jd_sys.base_users")
+		#self.assertTrue(len(result) > 0)
+		for row in result:
+			print(row)
+		
+	def test_sqlalchemy_pygresql(self):
+		db_url = "postgresql+pygresql://jingdongdwadmin:jingdongdwadmin.@10.13.40.16:5432/jingdongdw"
+
+		engine = create_engine(db_url, echo=True)
+
+		connection = engine.connect()
+		
+		
+def suite():
+	suite = unittest.TestSuite()
+	suite.addTest(SqlAlchemyTest("test_pygresql"))
+	suite.addTest(SqlAlchemyTest("test_sqlalchemy_psycopg2"))
+	return suite
+	
 if __name__ == "__main__":
-	print(dir(Student))
-	s = Student()
-	
-	# access public class field by class name
-	print(Student.name)
-	# access public class field by instance
-	print(s.name)
-	
-	print(s.getName())
-	
-	# print(Student.__sex)
-	print(s.getSex())
-	
-	
-	print(s.age)
-	print(s.getAge())
-	# print(s.__setAge(33))
-	
-	#print(s.__addr)
-	print(s._Student__addr)
-	print(s.getAddr())
-	s.addr = "SHANGHAI"
-	print(s.addr)
-	
-	s.sayHi()
-	Student.sayHi()
-	s.sayGood()
-	Student.sayGood()
+	unittest.main(defaultTest = "suite")
