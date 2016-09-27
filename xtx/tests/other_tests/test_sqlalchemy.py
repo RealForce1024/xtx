@@ -4,7 +4,7 @@
 import unittest
 
 from sqlalchemy import create_engine
-
+from sqlalchemy import text
 
 
 class SqlAlchemyTest(unittest.TestCase):
@@ -32,7 +32,8 @@ class SqlAlchemyTest(unittest.TestCase):
 
 		connection = engine.connect()
 		
-		result = connection.execute("select * from jd_sys.base_users")
+		
+		result = connection.execute(text("select * from :tbl"),{'tbl': 'jd_sys.base_users'})
 		#self.assertTrue(len(result) > 0)
 		for row in result:
 			print(row)
