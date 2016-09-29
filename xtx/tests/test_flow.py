@@ -3,6 +3,93 @@
 
 import unittest
 
+class ModelMetaClass(type):
+	def __new__():
+		# get all columns
+		attrs["getColumns"] = None
+		
+class Storage(object):
+	def create(self, force = False):
+		"""
+		remove the existed one firstly, then create a new none when force is True.
+		"""
+		pass
+
+	def clear(self, force = False):
+		"""
+		clear the data whether or not existing foreign relation when force is True.
+		"""
+		pass
+		
+	def remove(self, force = False):
+		"""
+		remove the storage whether or not existing foreign relations when force is True.
+		"""
+		pass
+
+class DbTableStorage(Storage, metaclass = ModelMetaClass):
+
+	from sqlalchemy import create_engine
+	from sqlalchemy import text
+	
+	def __delete(self):
+		pass
+		
+	def __delete_cascade(self):
+		pass
+		
+	def __drop(self):
+		pass
+		
+	def __drop_cascade(self):
+		pass
+	
+	def clear(self, force = False):
+		if force == False:
+			self.__delete()
+		else:
+			self.__delete_cascade()
+			
+	
+	def remove(self, force = False):
+		if force == False:
+			self.__drop()
+		else:
+			self.__drop_cascade()
+			
+		
+	def __create_if_not_exist(self):
+		pass
+		
+	def __create(self):
+		pass
+		
+		
+class Column(object):
+	pass
+	
+	
+class DbColumn(Column):
+	pass
+
+class BankModel(DbTableStorage):
+	__schemaname__ = "jd_biz"
+	__tablename__ = "banks"
+	
+	code = DbColumn(name = "code", nullable = False)
+	name = DbColumn(name = "name", nullable = False)
+
+class CardFactModel(DbTableStorage):
+	__schemaname__ = "jd_biz"
+	__tablename__ = "card_fact_tbl"
+	
+	date = DbColumn(name="date", nullable = True)
+	src_type = DbColumn(name="type", nullable = True)
+	bank_code = DbColumn(name = "bank_code")
+	
+	batch_code = DbCOlumn(name = "batch_code")
+	
+	
 
 class SimpleFlowTest(unittest.TestCase):
 	def setUp(self):
@@ -18,7 +105,7 @@ class SimpleFlowTest(unittest.TestCase):
 		df_src = excelExtractor.extract(filepath = file_path, sheetIndex = 0)
 		
 		# transform
-		
+		card_fact = 
 		
 		# load
 		db_url = ""
