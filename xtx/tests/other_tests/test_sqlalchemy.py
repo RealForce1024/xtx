@@ -18,7 +18,7 @@ class SqlAlchemyTest(unittest.TestCase):
 	def test_pygresql(self):
 		import pg
 		
-		conn = pg.connect(dbname = 'jingdongdw', host = '10.13.40.16', user = 'jingdongdwadmin', passwd = 'jingdongdwadmin.') 
+		conn = pg.connect(dbname = 'jingdongdw', host = '10.13.28.34', user = 'jingdongdwadmin', passwd = 'jingdongdwadmin.') 
 		sql_select = "select * from jd_sys.base_users"
 		users = conn.query(sql_select).dictresult()
 		self.assertTrue(len(users) > 0)
@@ -26,7 +26,7 @@ class SqlAlchemyTest(unittest.TestCase):
 			print(row)
 			
 	def test_sqlalchemy_psycopg2(self):
-		db_url = "postgresql+psycopg2://jingdongdwadmin:jingdongdwadmin.@10.13.40.16:5432/jingdongdw"
+		db_url = "postgresql+psycopg2://jingdongdwadmin:jingdongdwadmin.@10.13.28.34:5432/jingdongdw"
 
 		engine = create_engine(db_url, echo=True)
 
@@ -39,7 +39,7 @@ class SqlAlchemyTest(unittest.TestCase):
 			print(row)
 		
 	def test_sqlalchemy_pygresql(self):
-		db_url = "postgresql+pygresql://jingdongdwadmin:jingdongdwadmin.@10.13.40.16:5432/jingdongdw"
+		db_url = "postgresql+pygresql://jingdongdwadmin:jingdongdwadmin.@10.13.28.34:5432/jingdongdw"
 
 		engine = create_engine(db_url, echo=True)
 

@@ -21,7 +21,7 @@ class ExcelLoader(object):
 		wb.create_sheet(0)
 		wb.save(self.targetPath)
 		
-	def write(self):
+	def load(self):
 		if not os.path.exists(self.targetPath):
 			self.__recreateFile()
 		else:
@@ -48,5 +48,5 @@ class ExcelLoader(object):
 if __name__ == "__main__":
 	testdata = [["A","B","C"],["D","E","F"]]
 	ew = ExcelLoader(testdata, r"D:\merge.xlsx", targetSheet = 0, recreateFile = True)
-	ew.write()
+	ew.load()
 	print("OK")
