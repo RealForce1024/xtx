@@ -2,8 +2,6 @@
 # -*- coding: utf-8  -*-
 
 import os.path
-import pandas as pd
-
 from abc import ABCMeta,abstractmethod
 
 from storage import Storage
@@ -12,6 +10,7 @@ class FileStorage(Storage, metaclass = ABCMeta):
 
     def __init__(self, filepath = None):
         super().__init__()
+        self.filepath = filepath
 
     def create(self, force = False):
         if os.path.exists(self.filepath):
@@ -44,4 +43,3 @@ class FileStorage(Storage, metaclass = ABCMeta):
     @abstractmethod
     def read(self, line_limit = -1):
         pass
-

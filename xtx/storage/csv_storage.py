@@ -9,11 +9,7 @@ from file_storage import FileStorage
 class CsvStorage(FileStorage):
 
     def __init__(self, filepath):
-        super().__init__()
-
-
-
-
+        super().__init__(filepath)
 
     def write(self, data, overwrite = True):
         if not os.path.exists(self.filepath):
@@ -38,4 +34,6 @@ class CsvStorage(FileStorage):
         return data
 
 if __name__ == "__main__":
-	cs = CsvStorage("")
+    filepath = os.path.abspath(r"../../test/data/test_create.csv")
+    cs = CsvStorage(filepath = filepath)
+    cs.create()
