@@ -4,40 +4,18 @@
 import os
 import os.path
 
-from .storage import Storage
+from file_storage import FileStorage
 
-class CsvStorage(Storage):
+class CsvStorage(FileStorage):
 
     def __init__(self, filepath):
         super().__init__()
 
 
-    def create(self, force = False):
-        if os.path.exists(self.filepath):
-            if force == False:
-                raise FileExistError
-            else:
-                os.remove(self.filepath)
-        with open(self.filepath, "w", encoding="utf-8") as file:
-            pass
 
 
-    def clear(self, force = False):
-        if not os.path.exists(self.filepath):
-            raise FileExistError
-        with open(self.filepath, "w", encoding="utf-8") as file:
-            file.truncate()
 
-
-    def remove(self, force = False):
-        if os.path.exists(self.filepath):
-            os.remove(self.filepath)
-        else:
-            if force == False:
-                raise FileNotFoundError
-
-
-    def write(self, data):
+    def write(self, data, overwrite = True):
         if not os.path.exists(self.filepath):
             raise FileNotFoundError
         with open(self.filepath, "w", encoding="utf-8") as file:
@@ -58,3 +36,6 @@ class CsvStorage(Storage):
                 data.append(line.split(','))
                 line_index += 1
         return data
+
+if __name__ == "__main__":
+	cs = CsvStorage("")

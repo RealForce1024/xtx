@@ -27,7 +27,7 @@ class Storage(object, metaclass = ABCMeta):
 		pass
 
 	@abstractmethod
-	def write(self, data):
+	def write(self, data, overwrite = True):
 		pass
 
 	@abstractmethod

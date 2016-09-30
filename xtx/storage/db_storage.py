@@ -4,9 +4,10 @@
 import os.path
 import pandas as pd
 
-from file_storage import FileStorage
-
-class ExcelStorage(FileStorage):
+class ExcelStorage(Storage):
 
     def __init__(self, filepath = None):
         super().__init__()
+
+    def create(self, force = False):
+        pass
