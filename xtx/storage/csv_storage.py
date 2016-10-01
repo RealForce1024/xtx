@@ -34,6 +34,6 @@ class CsvStorage(FileStorage):
         return data
 
 if __name__ == "__main__":
-    filepath = os.path.abspath(r"../../test/data/test_create.csv")
+    filepath = os.path.abspath(r"../tests/data/test_create.csv")
     cs = CsvStorage(filepath = filepath)
     cs.create()

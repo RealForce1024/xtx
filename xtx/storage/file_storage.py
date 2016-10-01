@@ -18,7 +18,7 @@ class FileStorage(Storage, metaclass = ABCMeta):
                 raise FileExistError
             else:
                 os.remove(self.filepath)
-        with open(self.filepath, "w", encoding="utf-8") as file:
+        with open(self.filepath, "w") as file:
             pass
 
 
