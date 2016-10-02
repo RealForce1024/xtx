@@ -28,8 +28,14 @@ class Storage(object, metaclass = ABCMeta):
 
 	@abstractmethod
 	def write(self, data, overwrite = True):
+		"""
+		overwrite the existed data while overwrite is True.
+		"""
 		pass
 
 	@abstractmethod
 	def read(self, line_limit = -1):
+		"""
+		read all lines while line_limit equals -1.
+		"""
 		pass

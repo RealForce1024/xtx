@@ -4,7 +4,7 @@
 import os.path
 import pandas as pd
 
-class ExcelStorage(Storage):
+class DbStorage(Storage):
 
     def __init__(self, filepath = None):
         super().__init__()
