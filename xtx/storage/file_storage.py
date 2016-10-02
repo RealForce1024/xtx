@@ -6,7 +6,7 @@ import os.path
 from abc import ABCMeta,abstractmethod
 
 from storage import Storage
-from exceptions import StorageExistsError
+from exceptions import StorageExistsError, StorageNotFoundError
 
 class FileStorage(Storage, metaclass = ABCMeta):
 
@@ -22,9 +22,9 @@ class FileStorage(Storage, metaclass = ABCMeta):
             else:
                 os.remove(self.filepath)
 		# if dir not existed
-		(head, tail) = os.path.split(self.filepath)
-		if not os.path.exists(head):
-			os.makedirs(head)
+        (head, tail) = os.path.split(self.filepath)
+        if not os.path.exists(head):
+            os.makedirs(head)
 
         with open(self.filepath, "w") as file:
             pass
@@ -32,7 +32,7 @@ class FileStorage(Storage, metaclass = ABCMeta):
 
     def clear(self, force = False):
         if not os.path.exists(self.filepath):
-            raise FileExistsError
+            raise StorageNotFoundError
         with open(self.filepath, "w", encoding="utf-8") as file:
             file.truncate()
 
@@ -42,7 +42,7 @@ class FileStorage(Storage, metaclass = ABCMeta):
             os.remove(self.filepath)
         else:
             if force == False:
-                raise FileNotFoundError
+                raise StorageNotFoundError
 
     @abstractmethod
     def write(self, data, overwrite = True):

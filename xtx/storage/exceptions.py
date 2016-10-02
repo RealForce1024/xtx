@@ -6,4 +6,8 @@ class StorageExistsError(Exception):
 	def __init__(self, location):
 		self.location = location
 
-	
+
+class StorageNotFoundError(Exception):
+
+	def __init__(self, location):
+		self.location = location
