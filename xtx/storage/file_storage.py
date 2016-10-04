@@ -5,8 +5,8 @@ import os
 import os.path
 from abc import ABCMeta,abstractmethod
 
-from storage import Storage
-from exceptions import StorageExistsError, StorageNotFoundError
+from xtx.storage.storage import Storage
+from xtx.storage.exceptions import StorageExistsError, StorageNotFoundError
 
 class FileStorage(Storage, metaclass = ABCMeta):
 
