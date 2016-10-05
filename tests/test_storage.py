@@ -24,7 +24,7 @@ class StorageTest(unittest.TestCase):
 		pass
 
 	def test_instance(self):
-		s = Storage()
+		s = Storage() # can not create instance
 
 
 class FileStorageTest(unittest.TestCase):
@@ -35,8 +35,8 @@ class FileStorageTest(unittest.TestCase):
 	def tearDown(self):
 		pass
 
-	def test_create(self):
-		s = FileStorage()
+	def test_instance(self):
+		s = FileStorage() # can not create instance
 
 
 
@@ -48,20 +48,21 @@ class CsvStorageTest(unittest.TestCase):
 	def tearDown(self):
 		pass
 
+	def test_create(self):
+		
+
 	def test_read(self):
-
-		import os
-		print(os.getcwd())
-
 		s = CsvStorage(r"tests/data/test.csv")
-		print(s.read())
+		dat = s.read()
+		self.assertTrue(len(dat) > 0)
+
 
 
 
 def suite():
 	suite = unittest.TestSuite()
 	suite.addTest(StorageTest("test_instance"))
-	suite.addTest(FileStorageTest("test_create"))
+	suite.addTest(FileStorageTest("test_instance"))
 	suite.addTest(CsvStorageTest("test_read"))
 	return suite
 
