@@ -18,3 +18,9 @@ class UnmatchExtensionError(Exception):
     
     def __init__(self, location):
         self.location = location
+
+
+class ForeignRelationExistsError(Exception):
+
+    def __init__(self, location):
+        self.location = location

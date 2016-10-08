@@ -78,7 +78,7 @@ class ExcelStorage(FileStorage):
             raise StorageNotFoundError(self.filepath)
         raise NotImplementedError
 
-    def read(self, line_limit = -1, sheetIndex = -1, sheetName = None):
+    def read(self, limit = -1, sheetIndex = -1, sheetName = None):
         if not os.path.exists(self.filepath):
             raise StorageNotFoundError(self.filepath)
         

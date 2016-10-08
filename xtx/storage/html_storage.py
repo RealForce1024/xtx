@@ -14,5 +14,5 @@ class HtmlStorage(FileStorage):
 	def write(self, data, overwrite = True):
 		raise NotImplementedError
 
-	def read(self, line_limit = -1):
+	def read(self, limit = -1):
 		raise NotImplementedError

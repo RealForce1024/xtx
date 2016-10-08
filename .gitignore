@@ -1,6 +1,7 @@
 target
 .vs
 __pycache__
+tmp
 *.*~
 *.pyc
 

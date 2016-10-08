@@ -15,6 +15,13 @@ from xtx.storage.storage import Storage
 from xtx.storage.file_storage import FileStorage
 from xtx.storage.csv_storage import CsvStorage
 from xtx.storage.excel_storage import ExcelStorage
+from xtx.storage.exceptions import *
+
+def get_func_name():
+    import inspect
+    #print(inspect.stack()[1])
+    return inspect.stack()[1][3]
+
 
 
 class StorageTest(unittest.TestCase):
@@ -47,18 +54,49 @@ class FileStorageTest(unittest.TestCase):
 class CsvStorageTest(unittest.TestCase):
 
 	def setUp(self):
-		pass
+		self.tmpdir = r"tests/data/tmp/"
+		self.classname = self.__class__.__name__
+		self.separator = "$"
+		self.ext = ".csv"
 
 	def tearDown(self):
 		pass
 
-	def test_create(self):
+	def test_create_file_not_exists(self):
+		testfile = self.classname + self.separator + get_func_name() + self.ext
+		s = CsvStorage(self.tmpdir + testfile)
+		#s.remove(force = True)
+		s.create()
+		#s.remove()
+
+	def test_create_file_exists(self):
+		s = CsvStorage(r"tests/data/test_tocreate.csv")
+		
+
+	def test_create_file_exists_force(self):
+		pass
+
+	def test_remove(self):
+		with self.assertRaises(StorageNotFoundError):
+			s = CsvStorage(r"tests/data/test_notexists.csv")
+			s.remove()
+		s = CsvStorage(r"tests/data/test_todel.csv")
+		s.create()
+		s.remove()
+
+	def test_clear(self):
 		pass
 
 	def test_read(self):
 		s = CsvStorage(r"tests/data/test.csv")
 		dat = s.read()
 		self.assertTrue(len(dat) > 0)
+
+	def test_read_limit(self):
+		pass
+
+	def test_write(self):
+		pass
 
 class ExcelStorageTest(unittest.TestCase):
 	
@@ -80,8 +118,9 @@ def suite():
 	suite = unittest.TestSuite()
 	suite.addTest(StorageTest("test_instance"))
 	suite.addTest(FileStorageTest("test_instance"))
-	suite.addTest(CsvStorageTest("test_read"))
-	suite.addTest(ExcelStorageTest("test_read"))
+	suite.addTest(CsvStorageTest("test_create_file_not_exists"))
+	#suite.addTest(CsvStorageTest("test_read"))
+	#suite.addTest(ExcelStorageTest("test_read"))
 	return suite
 
 if __name__ == "__main__":
