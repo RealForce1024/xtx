@@ -26,7 +26,8 @@ class StorageTest(unittest.TestCase):
 		pass
 
 	def test_instance(self):
-		s = Storage() # can not create instance
+		with self.assertRaises(TypeError):
+			s = Storage() # can not create instance
 
 
 class FileStorageTest(unittest.TestCase):
@@ -38,7 +39,8 @@ class FileStorageTest(unittest.TestCase):
 		pass
 
 	def test_instance(self):
-		s = FileStorage() # can not create instance
+		with self.assertRaises(TypeError):
+			s = FileStorage() # can not create instance
 
 
 
@@ -59,17 +61,17 @@ class CsvStorageTest(unittest.TestCase):
 		self.assertTrue(len(dat) > 0)
 
 class ExcelStorageTest(unittest.TestCase):
-    
-    def setUp(self):
-        pass
-        
-    def tearDown(self):
-        pass
-        
-    def test_read(self):
-        e = ExcelStorage(r"tests/data/test.xlsx")
-        dat = e.read()
-        self.assertTrue(len(dat) > 0)
+	
+	def setUp(self):
+		pass
+		
+	def tearDown(self):
+		pass
+		
+	def test_read(self):
+		e = ExcelStorage(r"tests/data/test.xlsx")
+		dat = e.read()
+		self.assertTrue(len(dat) > 0)
 
 
 
