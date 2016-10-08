@@ -4,7 +4,7 @@
 """
 execute the unittest file in xtx home directory.
 """
-
+import os
 import sys
 sys.path.append(r"../xtx/")
 #sys.path.append(r"..\xtx")
@@ -122,6 +122,9 @@ class CsvStorageTest(unittest.TestCase):
 		dat = [["a1", "b1", "c1"],[1, 2, 3]]
 		s.write(data = dat, overwrite = True)
 		s.copy()
+		newfilename = self.classname + self.separator + get_func_name() + FileStorage.POSTFIX + self.ext
+		self.assertTrue(os.path.exists(self.tmpdir + newfilename))
+		s.remove()
 
 	def test_copy_path(self):
 		testfile = self.classname + self.separator + get_func_name() + self.ext
@@ -130,8 +133,11 @@ class CsvStorageTest(unittest.TestCase):
 		s.create()
 		dat = [["a11", "b11", "c11"],[1, 2, 3]]
 		s.write(data = dat, overwrite = True)
-		import os
-		s.copy(path = self.tmpdir + os.path.sep + "test_copy2.csv")
+		newpath = self.tmpdir + os.path.sep + "test_copy2.csv"
+		s.copy(path = newpath)
+		self.assertTrue(os.path.exists(newpath))
+		s.remove()
+		CsvStorage(newpath).remove()
 
 	def test_remove(self):
 		with self.assertRaises(StorageNotFoundError):
