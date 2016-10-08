@@ -7,6 +7,13 @@ Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "xtx", "xtx\xtx.pyproj", "{A
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "tests", "tests\tests.pyproj", "{82FC0CC3-7D14-436B-95CB-8B98404ED2AA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EFE67561-FBD4-44B0-B317-85C862D1995E}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		README.md = README.md
+		setup.py = setup.py
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

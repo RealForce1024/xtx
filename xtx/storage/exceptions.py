@@ -13,7 +13,7 @@ class StorageNotFoundError(Exception):
 		self.location = location
 
 
-        
+
 class UnmatchExtensionError(Exception):
     
     def __init__(self, location):

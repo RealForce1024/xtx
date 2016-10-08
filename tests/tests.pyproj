@@ -6,7 +6,8 @@
     <ProjectGuid>{82fc0cc3-7d14-436b-95cb-8b98404ed2aa}</ProjectGuid>
     <ProjectHome />
     <StartupFile>test_storage.py</StartupFile>
-    <SearchPath>..\xtx\</SearchPath>
+    <SearchPath>
+    </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
@@ -30,13 +31,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="other_tests" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\xtx\xtx.pyproj">
-      <Name>xtx</Name>
-      <Project>{a68f899d-ce64-492a-b60c-2eebe052c18a}</Project>
-      <Private>True</Private>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(PtvsTargetsFile)" Condition="Exists($(PtvsTargetsFile))" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="!Exists($(PtvsTargetsFile))" />
