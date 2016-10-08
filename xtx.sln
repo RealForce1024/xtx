@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "xtx", "xtx\xtx.pyproj", "{A68F899D-CE64-492A-B60C-2EEBE052C18A}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "tests", "tests\tests.pyproj", "{82FC0CC3-7D14-436B-95CB-8B98404ED2AA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A68F899D-CE64-492A-B60C-2EEBE052C18A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A68F899D-CE64-492A-B60C-2EEBE052C18A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82FC0CC3-7D14-436B-95CB-8B98404ED2AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82FC0CC3-7D14-436B-95CB-8B98404ED2AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
