@@ -63,7 +63,7 @@ class Storage(object, metaclass = ABCMeta):
 		pass
 
 	@abstractmethod
-	def copy(self, name = None):
+	def copy(self, path = None):
 		"""
 		When name is None, the default name is ( oldname + "_copy" );
 		When name is not None, use the specified name.

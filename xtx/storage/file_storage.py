@@ -25,7 +25,7 @@ class FileStorage(Storage, metaclass = ABCMeta):
             if force == False:
                 raise StorageExistsError(self.filepath)
             else:
-                os.remove(self.filepath)
+                self.remove(self.filepath)
 
         (head, tail) = os.path.split(self.filepath)
         if not os.path.exists(head):
@@ -46,24 +46,27 @@ class FileStorage(Storage, metaclass = ABCMeta):
         if not self.exists():
             if force == False:
                 raise StorageNotFoundError(self.filepath)
-        os.remove(self.filepath)
+        else:
+            os.remove(self.filepath)
 
 
-    def copy(self, name = None):
-        if self.exists():
+    def copy(self, path = None):
+        if not self.exists():
             raise StorageNotFoundError(self.filepath)
-        newname = None
-        dirname = os.path.dirname(self.filepath)
-        filename = os.path.basename(self.filepath)
-        sections = filename.split(".")
-        newname = sections[0] + POSTFIX + "." + sections[1] if len(sections) == 2 else sections[0] + POSTFIX
-
         import shutil
-        shutil.copyfile(self.filepath, dirname + os.path.sep + newname)
-        
+        if path is not None:
+            shutil.copyfile(self.filepath, path)
+        else:
+            newname = None
+            dirname = os.path.dirname(self.filepath)
+            filename = os.path.basename(self.filepath)
+            sections = filename.split(".")
+            newname = sections[0] + FileStorage.POSTFIX + "." + sections[1] if len(sections) == 2 else sections[0] + FileStorage.POSTFIX
+            shutil.copyfile(self.filepath, dirname + os.path.sep + newname)
+
 
     @abstractmethod
-    def write(self, data, overwrite = True):
+    def write(self, data, overwrite = False):
         pass
 
     @abstractmethod

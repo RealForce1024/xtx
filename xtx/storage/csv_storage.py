@@ -19,7 +19,7 @@ class CsvStorage(FileStorage):
         openmode = "a" if overwrite == False else "w"
         with open(self.filepath, openmode, encoding="utf-8") as file:
             for row in data:
-                file.write(','.join(row))
+                file.write(','.join(list(map(str, row))))
                 file.write('\n')
 
 
