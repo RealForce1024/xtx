@@ -27,7 +27,7 @@ class StorageTest(unittest.TestCase):
 
 	def test_instance(self):
 		with self.assertRaises(TypeError):
-			s = Storage() # can not create instance
+			s = Storage() # can not instance
 
 
 class FileStorageTest(unittest.TestCase):
@@ -40,7 +40,7 @@ class FileStorageTest(unittest.TestCase):
 
 	def test_instance(self):
 		with self.assertRaises(TypeError):
-			s = FileStorage() # can not create instance
+			s = FileStorage() # can not instance
 
 
 

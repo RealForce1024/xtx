@@ -5,7 +5,8 @@ import os
 import os.path
 
 from xtx.storage.file_storage import FileStorage
-from xtx.storage.exceptions import StorageExistsError, StorageNotFoundError
+from xtx.storage.exceptions import (StorageExistsError
+    , StorageNotFoundError)
 
 class CsvStorage(FileStorage):
 

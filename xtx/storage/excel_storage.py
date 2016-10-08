@@ -5,7 +5,9 @@ import os.path
 import pandas as pd
 
 from xtx.storage.file_storage import FileStorage
-from xtx.storage.exceptions import StorageExistsError, StorageNotFoundError, UnmatchExtensionError
+from xtx.storage.exceptions import (StorageExistsError
+    , StorageNotFoundError
+    , UnmatchExtensionError)
 
 class ExcelStorage(FileStorage):
 
