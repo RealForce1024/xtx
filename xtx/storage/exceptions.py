@@ -11,3 +11,10 @@ class StorageNotFoundError(Exception):
 
 	def __init__(self, location):
 		self.location = location
+
+
+        
+class UnmatchExtensionError(Exception):
+    
+    def __init__(self, location):
+        self.location = location
