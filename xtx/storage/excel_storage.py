@@ -2,7 +2,6 @@
 # -*- coding: utf-8  -*-
 
 import os.path
-import pandas as pd
 
 from xtx.storage.bin_file_storage import BinFileStorage
 from xtx.storage.exceptions import (StorageExistsError

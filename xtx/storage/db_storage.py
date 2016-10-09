@@ -2,7 +2,6 @@
 # -*- coding: utf-8  -*-
 
 import os.path
-import pandas as pd
 
 class DbStorage(Storage):
 

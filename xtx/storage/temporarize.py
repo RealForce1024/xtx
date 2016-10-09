@@ -5,12 +5,13 @@ from xtx.storage.storage import Storage
 import xtx.storage.storage_utils
 from xtx.storage.exceptions import *
 
-"""
-usage:
-	with Temporarize("filepath") as temp:
-		....
-"""
+
 class Temporarize(object):
+	"""
+	usage:
+		with Temporarize("filepath") as temp:
+			....
+	"""
 
 	def __init__(self, storage = None, filepath = None):
 		if storage is not None :

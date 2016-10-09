@@ -9,39 +9,42 @@ from xtx.storage.file_storage import FileStorage
 from xtx.storage.exceptions import *
 
 class TextFileStorage(FileStorage, metaclass = ABCMeta):
+	"""
+	text file 
+	"""
 
-    def __init__(self, filepath = None):
-        super().__init__(filepath)
-        self.filepath = self.location
+	def __init__(self, filepath = None):
+		super().__init__(filepath)
+		self.filepath = self.location
 
 
-    def create(self, force = False):
+	def create(self, force = False):
 		# if the file existed
-        if self.exists():
-            if force == False:
-                raise StorageExistsError(self.filepath)
-            else:
-                self.remove(self.filepath)
+		if self.exists():
+			if force == False:
+				raise StorageExistsError(self.filepath)
+			else:
+				self.remove(self.filepath)
 
-        (head, tail) = os.path.split(self.filepath)
-        if not os.path.exists(head):
-            os.makedirs(head)
-        with open(self.filepath, "w") as file:
-            pass
-
-
-    def clear(self, force = False):
-        if not self.exists():
-            if force == False:
-                raise StorageNotFoundError(self.filepath)
-        with open(self.filepath, "w", encoding="utf-8") as file:
-            file.truncate()
+		(head, tail) = os.path.split(self.filepath)
+		if not os.path.exists(head):
+			os.makedirs(head)
+		with open(self.filepath, "w") as file:
+			pass
 
 
-    @abstractmethod
-    def write(self, data, overwrite = False):
-        pass
+	def clear(self, force = False):
+		if not self.exists():
+			if force == False:
+				raise StorageNotFoundError(self.filepath)
+		with open(self.filepath, "w", encoding="utf-8") as file:
+			file.truncate()
 
-    @abstractmethod
-    def read(self, limit = -1):
-        pass
+
+	@abstractmethod
+	def write(self, data, overwrite = False):
+		pass
+
+	@abstractmethod
+	def read(self, limit = -1):
+		pass

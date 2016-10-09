@@ -9,6 +9,9 @@ from xtx.storage.file_storage import FileStorage
 from xtx.storage.exceptions import *
 
 class BinFileStorage(FileStorage, metaclass = ABCMeta):
+	"""
+	binary file
+	"""
 
 	def __init__(self, filepath = None):
 		super().__init__(filepath)
