@@ -16,6 +16,7 @@ class FileStorage(Storage, metaclass = ABCMeta):
 		super().__init__(filepath)
 		self.filepath = self.location
 
+
 	def exists(self):
 		return os.path.exists(self.filepath)
 

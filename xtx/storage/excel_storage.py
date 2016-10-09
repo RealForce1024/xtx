@@ -9,32 +9,58 @@ from xtx.storage.exceptions import (StorageExistsError
 	, UnmatchExtensionError
 	, ArgumentsAbsenceError)
 
-class ExcelStorage(BinFileStorage):
+class Excel2003Storage(BinFileStorage):
+	"""
+	Excel 2003 format Storage
+	"""
+	
+	import xlrd
+	import xlwt
 
 	def __init__(self, filepath = None, sheetIndex = -1, sheetName = None):
 		super().__init__(filepath)
 		self.sheetIndex = sheetIndex
 		self.sheetName = sheetName
 
-	def getExtension(self):
-		return self.filepath.split(".")[-1]
-		
-	def __read_excel2003(self, limit = -1):
-		import xlrd
 
-		tabledata = []
-		wb = xlrd.open_workbook(self.filepath)
-
-		# get worksheet
+	def __get_worksheet(self, workbook_toread):
 		ws = None
-		if not sheetName is None:
-			ws = wb.sheet_by_name(self.sheetName)
+		if self.sheetName is not None:
+			ws = workbook_toread.sheet_by_name(self.sheetName)
 		else:
-			if not sheetIndex is None:
-				ws = wb.sheet_by_index(self.sheetIndex)
+			if self.sheetIndex is not -1:
+				ws = workbook_toread.sheet_by_index(self.sheetIndex)
 			else:
 				raise ArgumentsAbsenceError("The targetSheet arguments must be specified one:  sheetIndex=%s, sheetName=%s" % \
 					(self.sheetIndex, self.sheetName))
+		return ws
+
+
+	def create(self, force = False):
+		if self.exists():
+			if force == False:
+				raise StorageExistsError(self.filepath)
+			else:
+				self.remove(force = True)
+
+		wb_w = xlwt.Workbook(encoding='utf-8', style_compression=0)
+		createSheetName = self.sheetName if self.sheetName is not None else ("SHEET_" + self.sheetIndex)
+		sheet = wb_w.add_sheet(createSheetName, cell_overwrite_ok = True)
+		wb_w.save(self.filepath)
+
+
+	def clear(self, force = False):
+		if not self.exists():
+			if force == False:
+				raise StorageNotFoundError(self.filepath)
+		
+		raise NotImplementedError()
+
+
+	def read(self, limit =  -1):
+		tabledata = []
+		wb = xlrd.open_workbook(self.filepath)
+		ws = self.__get_worksheet(wb)
 
 		# get cell data
 		for rowIndex in range(0, ws.nrows):
@@ -51,23 +77,68 @@ class ExcelStorage(BinFileStorage):
 
 		return tabledata
 
-	def __read_excel2007(self, limit = -1):
-		from openpyxl.workbook import Workbook
-		from openpyxl import load_workbook
-		
-		tabledata = []
-		wb = load_workbook(filename = self.filepath)
-		
-		# get worksheet
+	def write(self, data, overwrite = False):
+		raise NotImplementedError()
+
+
+
+
+
+
+class Excel2007Storage(BinFileStorage):
+	"""
+	Excel 2007 format Storage
+	"""
+
+
+	from openpyxl.workbook import Workbook
+	from openpyxl import load_workbook
+
+	def __init__(self, filepath = None, sheetIndex = -1, sheetName = None):
+		super().__init__(filepath)
+		self.sheetIndex = sheetIndex
+		self.sheetName = sheetName
+
+
+	def __get_worksheet(self, workbook_toread):
 		ws = None
-		if not sheetName is None:
-			ws = wb.get_sheet_by_name(self.sheetName)
+		if not self.sheetName is None:
+			ws = workbook_toread.get_sheet_by_name(self.sheetName)
 		else:
-			if not sheetIndex is None:
-				ws = wb.get_sheet_by_name(wb.get_sheet_names()[self.sheetIndex])
+			if not self.sheetIndex is None:
+				ws = workbook_toread.get_sheet_by_name(wb.get_sheet_names()[self.sheetIndex])
 			else:
 				raise ArgumentsAbsenceError("The targetSheet arguments must be specified one:  sheetIndex=%s, sheetName=%s" % \
 					(self.sheetIndex, self.sheetName))
+		return ws
+
+
+	def create(self, force = False):
+		if self.exists():
+			if force == False:
+				raise StorageExistsError(self.filepath)
+			else:
+				self.remove(force = True)
+
+		wb = Workbook()
+		createSheetName = self.sheetName if self.sheetName is not None else ("SHEET_" + self.sheetIndex)
+		wb.create_sheet(title =createSheetName)
+		wb.save(self.filepath)
+
+
+	def clear(self, force = False):
+		wb = load_workbook(filename = self.filepath)
+		ws = self.__get_worksheet(wb)
+		wb.remove(ws)
+		createSheetName = self.sheetName if self.sheetName is not None else ("SHEET_" + self.sheetIndex)
+		wb.create_sheet(title =createSheetName)
+		wb.save(self.filepath)
+		
+
+	def read(self, limit =  -1):
+		tabledata = []
+		wb = load_workbook(filename = self.filepath)
+		ws = self.__get_worksheet(wb)
 		
 		# get cell data
 		for rowNum in range(1, ws.max_row + 1):
@@ -82,6 +153,49 @@ class ExcelStorage(BinFileStorage):
 		
 		return tabledata
 
+	def write(self, data, overwrite = False):
+		raise NotImplementedError()
+
+
+
+class ExcelStorage(BinFileStorage):
+
+	def __init__(self, filepath = None, sheetIndex = -1, sheetName = None):
+		super().__init__(filepath)
+		self.sheetIndex = sheetIndex
+		self.sheetName = sheetName
+
+		ext = self.filepath.split(".")[-1]
+		if ext == "xls":
+			pass
+		elif ext == "xlsx":
+			pass
+		else:
+			raise UnmatchExtensionError(self.filepath)
+
+	
+	def getExtension(self):
+		return self.filepath.split(".")[-1]
+
+	
+	def __create_excel2003(self):
+		pass
+
+
+	def __create_excel2007(self):
+		pass
+
+		
+	def __read_excel2003(self, limit = -1):
+		pass
+
+		
+
+	def __read_excel2007(self, limit = -1):
+		pass
+		
+		
+
 	def __write_excel2003(self, data, overwrite = False):
 		raise NotImplementedError(self.filepath)
 
@@ -93,8 +207,10 @@ class ExcelStorage(BinFileStorage):
 	def create(self, force = False):
 		raise NotImplementedError(self.filepath)
 
+
 	def clear(self, force = False):
 		raise NotImplementedError(self.filepath)
+
 		
 	def write(self, data, overwrite = False):
 		if not self.exists(self.filepath):
@@ -107,6 +223,7 @@ class ExcelStorage(BinFileStorage):
 			self.__write_excel2007(data = data, overwrite = overwrite)
 		else:
 			raise UnmatchExtensionError(self.filepath)
+
 
 	def read(self, limit = -1):
 		if not self.exists(self.filepath):

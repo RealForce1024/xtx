@@ -24,7 +24,7 @@ class TextFileStorage(FileStorage, metaclass = ABCMeta):
 			if force == False:
 				raise StorageExistsError(self.filepath)
 			else:
-				self.remove(self.filepath)
+				self.remove(force = True)
 
 		(head, tail) = os.path.split(self.filepath)
 		if not os.path.exists(head):
