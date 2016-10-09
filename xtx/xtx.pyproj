@@ -41,6 +41,9 @@
     <Compile Include="log\__init__.py" />
     <Compile Include="ml\kmeans.py" />
     <Compile Include="ml\__init__.py" />
+    <Compile Include="storage\bin_file_storage.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="storage\csv_storage.py" />
     <Compile Include="storage\db_storage.py" />
     <Compile Include="storage\eml_storage.py" />
@@ -50,7 +53,10 @@
     <Compile Include="storage\html_storage.py" />
     <Compile Include="storage\storage.py" />
     <Compile Include="storage\storage_utils.py" />
-    <Compile Include="storage\temp_storage.py" />
+    <Compile Include="storage\temporarize.py" />
+    <Compile Include="storage\text_file_storage.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="storage\__init__.py" />
     <Compile Include="transformers\Merger.py" />
     <Compile Include="transformers\__init__.py" />

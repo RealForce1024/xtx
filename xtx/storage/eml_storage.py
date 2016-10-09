@@ -4,9 +4,9 @@
 import os.path
 import pandas as pd
 
-from file_storage import FileStorage
+from xtx.storage.text_file_storage import TextFileStorage
 
-class EmlStorage(FileStorage):
+class EmlStorage(TextFileStorage):
 
 	def __init__(self, filepath = None):
 		super().__init__(filepath)

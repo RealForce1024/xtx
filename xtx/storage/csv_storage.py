@@ -4,11 +4,11 @@
 import os
 import os.path
 
-from xtx.storage.file_storage import FileStorage
+from xtx.storage.text_file_storage import TextFileStorage
 from xtx.storage.exceptions import (StorageExistsError
     , StorageNotFoundError)
 
-class CsvStorage(FileStorage):
+class CsvStorage(TextFileStorage):
 
     def __init__(self, filepath):
         super().__init__(filepath)

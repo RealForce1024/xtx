@@ -24,3 +24,9 @@ class ForeignRelationExistsError(Exception):
 
     def __init__(self, location):
         self.location = location
+
+
+class ArgumentsAbsenceError(Exception):
+
+	def __init__(self, message):
+		self.message = message

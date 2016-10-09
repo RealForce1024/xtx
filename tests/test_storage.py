@@ -2,7 +2,7 @@
 # -*- coding: utf-8  -*-
 
 """
-execute the unittest file in xtx home directory.
+execute the unittest file in project root directory.
 """
 import os
 import sys

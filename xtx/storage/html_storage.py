@@ -4,9 +4,9 @@
 import os
 import os.path
 
-from file_storage import FileStorage
+from xtx.storage.text_file_storage import TextFileStorage
 
-class HtmlStorage(FileStorage):
+class HtmlStorage(TextFileStorage):
 
 	def __init__(self, filepath = None):
 		super().__init__(filepath)

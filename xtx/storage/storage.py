@@ -6,6 +6,10 @@ from abc import ABCMeta,abstractmethod
 class Storage(object, metaclass = ABCMeta):
 
 	def __init__(self, location):
+		"""
+		When the storage is a file, the location is filepath;
+		When the storage is a database, the location is database connection info directory;
+		"""
 		self.location = location
 
 	@abstractmethod
