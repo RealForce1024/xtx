@@ -4,13 +4,13 @@
 import os.path
 import pandas as pd
 
-from xtx.storage.text_file_storage import TextFileStorage
+from xtx.storage.bin_file_storage import BinFileStorage
 from xtx.storage.exceptions import (StorageExistsError
 	, StorageNotFoundError
 	, UnmatchExtensionError
 	, ArgumentsAbsenceError)
 
-class ExcelStorage(TextFileStorage):
+class ExcelStorage(BinFileStorage):
 
 	def __init__(self, filepath = None, sheetIndex = -1, sheetName = None):
 		super().__init__(filepath)
