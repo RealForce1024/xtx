@@ -87,6 +87,14 @@ class ExcelStorage(BinFileStorage):
 
 	def __write_excel2007(self, data, overwrite = False):
 		raise NotImplementedError(self.filepath)
+
+
+
+	def create(self, force = False):
+		raise NotImplementedError(self.filepath)
+
+	def clear(self, force = False):
+		raise NotImplementedError(self.filepath)
 		
 	def write(self, data, overwrite = False):
 		if not self.exists(self.filepath):

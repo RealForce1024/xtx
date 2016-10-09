@@ -45,7 +45,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="storage\csv_storage.py" />
-    <Compile Include="storage\db_storage.py" />
+    <Compile Include="storage\dbtable_storage.py" />
     <Compile Include="storage\eml_storage.py" />
     <Compile Include="storage\excel_storage.py" />
     <Compile Include="storage\exceptions.py" />
