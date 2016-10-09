@@ -13,6 +13,8 @@ import unittest
 
 from xtx.storage.storage import Storage
 from xtx.storage.file_storage import FileStorage
+from xtx.storage.text_file_storage import TextFileStorage
+from xtx.storage.bin_file_storage import BinFileStorage
 from xtx.storage.csv_storage import CsvStorage
 from xtx.storage.excel_storage import ExcelStorage
 from xtx.storage.exceptions import *
@@ -48,6 +50,34 @@ class FileStorageTest(unittest.TestCase):
 	def test_instance(self):
 		with self.assertRaises(TypeError):
 			s = FileStorage() # can not instance
+            
+            
+class TextFileStorageTest(unittest.TestCase):
+    
+    def setUp(self):
+        pass
+        
+    def tearDown(self):
+        pass
+        
+    def test_instance(self):
+		with self.assertRaises(TypeError):
+			s = TextFileStorage() # can not instance
+        
+        
+class BinFileStorageTest(unittest.TestCase):
+    
+    def setUp(self):
+        pass
+        
+    def tearDown(self):
+        pass
+        
+    def test_instance(self):
+		with self.assertRaises(TypeError):
+			s = BinFileStorage() # can not instance
+        
+        
 
 
 
@@ -157,7 +187,10 @@ class CsvStorageTest(unittest.TestCase):
 class ExcelStorageTest(unittest.TestCase):
 	
 	def setUp(self):
-		pass
+		self.tmpdir = r"tests/data/tmp/"
+		self.classname = self.__class__.__name__
+		self.separator = "$"
+		self.ext = ".csv"
 		
 	def tearDown(self):
 		pass
