@@ -162,80 +162,28 @@ class ExcelStorage(BinFileStorage):
 
 	def __init__(self, filepath = None, sheetIndex = -1, sheetName = None):
 		super().__init__(filepath)
-		self.sheetIndex = sheetIndex
-		self.sheetName = sheetName
 
 		ext = self.filepath.split(".")[-1]
 		if ext == "xls":
-			pass
+			self.excelStorage = Excel2003Storage(filepath = filepath, sheetIndex = sheetIndex, sheetName = sheetName)
 		elif ext == "xlsx":
-			pass
+			self.excelStorage = Excel2007Storage(filepath = filepath, sheetIndex = sheetIndex, sheetName = sheetName)
 		else:
 			raise UnmatchExtensionError(self.filepath)
-
-	
-	def getExtension(self):
-		return self.filepath.split(".")[-1]
-
-	
-	def __create_excel2003(self):
-		pass
-
-
-	def __create_excel2007(self):
-		pass
-
-		
-	def __read_excel2003(self, limit = -1):
-		pass
-
-		
-
-	def __read_excel2007(self, limit = -1):
-		pass
-		
-		
-
-	def __write_excel2003(self, data, overwrite = False):
-		raise NotImplementedError(self.filepath)
-
-	def __write_excel2007(self, data, overwrite = False):
-		raise NotImplementedError(self.filepath)
-
 
 
 	def create(self, force = False):
-		raise NotImplementedError(self.filepath)
+		return self.excelStorage.create(force = force)
 
 
 	def clear(self, force = False):
-		raise NotImplementedError(self.filepath)
+		return self.excelStorage.clear(force = force)
 
 		
 	def write(self, data, overwrite = False):
-		if not self.exists(self.filepath):
-			raise StorageNotFoundError(self.filepath)
-
-		ext = self.getExtension()
-		if ext == "xls":
-			self.__write_excel2003(data = data, overwrite = overwrite)
-		elif ext == "xlsx":
-			self.__write_excel2007(data = data, overwrite = overwrite)
-		else:
-			raise UnmatchExtensionError(self.filepath)
+		return self.excelStorage.write(data = data, overwrite = overwrite)
 
 
 	def read(self, limit = -1):
-		if not self.exists(self.filepath):
-			raise StorageNotFoundError(self.filepath)
-		
-		data = None
-		ext = self.getExtension()
-		if ext == "xls":
-			data = self.__read_excel2003(limit = limit)
-		elif ext == "xlsx":
-			data = self.__read_excel2007(limit = limit)
-		else:
-			raise UnmatchExtensionError(self.filepath)
-		return data
+		return self.excelStorage.read(limit = limit)
 	
