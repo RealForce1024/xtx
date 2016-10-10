@@ -5,7 +5,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{82fc0cc3-7d14-436b-95cb-8b98404ed2aa}</ProjectGuid>
     <ProjectHome />
-    <StartupFile>test_storage.py</StartupFile>
+    <StartupFile>
+    </StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -26,10 +27,39 @@
     <Compile Include="other_tests\test_decorator.py" />
     <Compile Include="other_tests\test_metaclass.py" />
     <Compile Include="other_tests\test_sqlalchemy.py" />
+    <Compile Include="storage\test_bin_file_storage.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="storage\test_csv_storage.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="storage\test_excel_storage.py" />
+    <Compile Include="storage\test_excel2007_storage.py" />
+    <Compile Include="storage\test_excel2003_storage.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="storage\test_file_storage.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="storage\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="storage\test_storage.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="testing.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="test_flow.py" />
-    <Compile Include="test_storage.py" />
+    <Compile Include="storage\test_text_file_storage.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="storage\" />
     <Folder Include="other_tests" />
   </ItemGroup>
   <Import Project="$(PtvsTargetsFile)" Condition="Exists($(PtvsTargetsFile))" />
