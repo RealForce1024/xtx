@@ -66,7 +66,7 @@
     <Compile Include="storage\__init__.py" />
     <Compile Include="transformers\Merger.py" />
     <Compile Include="transformers\__init__.py" />
-    <Compile Include="utils\FileUtils.py" />
+    <Compile Include="utils\file_utils.py" />
     <Compile Include="utils\__init__.py" />
     <Compile Include="workflow\Action.py" />
     <Compile Include="workflow\Flow.py" />

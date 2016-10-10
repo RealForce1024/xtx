@@ -46,5 +46,5 @@ class TextFileStorage(FileStorage, metaclass = ABCMeta):
 		pass
 
 	@abstractmethod
-	def read(self, limit = -1):
+	def read(self, limit = -1, encoding = "utf-8"):
 		pass

@@ -23,15 +23,15 @@ class CsvStorage(TextFileStorage):
                 file.write('\n')
 
 
-    def read(self, limit = -1):
+    def read(self, limit = -1, encoding = "utf-8"):
         if not self.exists():
             raise StorageNotFoundError(self.filepath)
         data = []
-        with open(self.filepath, "r", encoding="utf-8") as file:
+        with open(self.filepath, "r", encoding = encoding) as file:
             line_index = 0
             for line in file.readlines():
                 if limit != -1 and line_index >= limit:
                     break
-                data.append(line.split(','))
+                data.append(line.rstrip('\n').split(','))
                 line_index += 1
         return data

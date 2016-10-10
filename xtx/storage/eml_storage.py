@@ -13,5 +13,5 @@ class EmlStorage(TextFileStorage):
 	def write(self, data, overwrite = True):
 		raise NotImplementedError
 
-	def read(self, limit = -1):
+	def read(self, limit = -1, encoding = "utf-8"):
 		raise NotImplementedError

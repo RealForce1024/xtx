@@ -25,6 +25,9 @@
   <ItemGroup>
     <Compile Include="other_tests\test_class_define.py" />
     <Compile Include="other_tests\test_decorator.py" />
+    <Compile Include="other_tests\test_list_add_remove.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="other_tests\test_metaclass.py" />
     <Compile Include="other_tests\test_sqlalchemy.py" />
     <Compile Include="storage\test_bin_file_storage.py">
