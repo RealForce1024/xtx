@@ -79,5 +79,12 @@ class Excel2007Storage(BinFileStorage):
 		return tabledata
 
 	def write(self, data, overwrite = False):
-		raise NotImplementedError()
+		wb = load_workbook(filename = self.filepath)
+		ws = self.__get_worksheet(wb)
+		for rowIndex in range(0, len(data)):
+			rowdata = data[rowIndex]
+			for colIndex in range(0, len(rowdata)):
+				celldata = rowdata[colIndex]
+				ws.cell(row = rowIndex + 1, column = colIndex + 1).value = celldata
+		wb.save(self.filepath)
 
