@@ -2,14 +2,20 @@
 # -*- coding: utf-8  -*-
 
 l = ["a", "b", "c", "d"]
-for i in l:
-	if i == "b" or i == "c":
-		l.remove(i)
+todel = []
+for i in range(0,len(l)):
+	e = l[i]
+	if e == "b" or e == "c":
+		todel.append(e)
+
+for i in todel:
+	l.remove(i)
 
 print("deleted:")
 print(l)
 
-l.extend(["e"])
+l.extend(["e", "f"])
+print("extended:")
 print(l)
 
 

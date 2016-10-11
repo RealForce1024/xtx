@@ -62,7 +62,7 @@ class Excel2007Storage(BinFileStorage):
 
 	def read(self, limit =  -1):
 		tabledata = []
-		wb = load_workbook(filename = self.filepath)
+		wb = load_workbook(filename = self.filepath, data_only = True)
 		ws = self.__get_worksheet(wb)
 		
 		# get cell data

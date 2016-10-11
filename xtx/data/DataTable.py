@@ -5,7 +5,7 @@ class DataTable(object):
 	
 	def __init__(self, name, *rows):
 		self.name = name
-		self.rows = rows if len(rows) > 0 ? else []
+		self.rows = rows if len(rows) > 0 else []
 		
 	def append(row):
 		self.rows.append(row)
