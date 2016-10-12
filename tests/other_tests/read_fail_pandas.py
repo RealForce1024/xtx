@@ -32,6 +32,10 @@ es_bankerr2regerr = ExcelStorage("快捷失败映射数据.xlsx", sheetName = "�
 bankerr2regerr_data = es_bankerr2regerr.read()
 df_bankerr2regerr = pd.DataFrame(bankerr2regerr_data[1:], columns = ["bank_name", "bank_err", "bank_err_key", "err_category"]).dropna()
 
+es_mercode2mertype = ExcelStorage("快捷失败映射数据.xlsx", sheetName = "商户号")
+mercode2mertype_data = es_mercode2mertype.read()
+df_mer = pd.DataFrame(mercode2mertype_data[1:], columns = ["mer_code", "mer_name", "biz_level_1", "biz_level_2", "biz_level_3"])
+
 todel = []
 for row in fail_data:
     if len(row) > len(columnNames):
@@ -66,6 +70,15 @@ df_tmp["bank_err_fkey"] = df_tmp["bank_name"] + "$" + df_tmp["bank_error_msg"]
 df_tmp = pd.merge(df_tmp, df_bankerr2regerr, left_on = "bank_err_fkey", right_on = "bank_err_key", how="left")
 
 df_tmp[pd.isnull(df_tmp["err_category"])].to_csv("err_cat_nan.csv")
+
+df_tmp = pd.merge(df_tmp, df_mer, left_on = "merchant_code", right_on = "mer_code", how = "left")
+
+df_tmp["biz_level_1"].fillna("网银自营")
+df_tmp["biz_level_2"].fillna("网银自营")
+df_tmp["biz_level_3"].fillna("网银自营")
+
+df_tmp.to_csv("final.csv")
+
 
 #print(df_tmp)
 
