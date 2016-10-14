@@ -34,7 +34,7 @@ df_bankerr2regerr = pd.DataFrame(bankerr2regerr_data[1:], columns = ["bank_name"
 
 es_mercode2mertype = ExcelStorage("快捷失败映射数据.xlsx", sheetName = "商户号")
 mercode2mertype_data = es_mercode2mertype.read()
-df_mer = pd.DataFrame(mercode2mertype_data[1:], columns = ["mer_code", "mer_name", "biz_level_1", "biz_level_2", "biz_level_3"])
+df_mer = pd.DataFrame(mercode2mertype_data[1:], columns = ["create_date", "mer_code", "sub_account_no", "mer_level_2nd_code", "member_id", "owner", "biz_level_1", "biz_level_2", "mer_name", "to_biz", "fee", "contact", "remark"])
 
 todel = []
 for row in fail_data:
@@ -65,23 +65,35 @@ df_fail_data["orders_count_int"] =  df_fail_data["orders_count"].astype(np.int32
 
 df_tmp = pd.merge(df_fail_data, df_interid2bank_data, on = "interface_id", how = "left")
 
+df_bankname_nan = df_tmp[pd.isnull(df_tmp["bank_name"])]
+df_bankname_nan.groupby(["interface_id"])["orders_count"].sum().to_csv("bank_name_nan.csv")
+
 df_tmp["bank_err_fkey"] = df_tmp["bank_name"] + "$" + df_tmp["bank_error_msg"]
 
 df_tmp = pd.merge(df_tmp, df_bankerr2regerr, left_on = "bank_err_fkey", right_on = "bank_err_key", how="left")
 
-df_tmp[pd.isnull(df_tmp["err_category"])].to_csv("err_cat_nan.csv")
+df_errcat_nan = df_tmp[pd.isnull(df_tmp["err_category"])]
 
-df_tmp = pd.merge(df_tmp, df_mer, left_on = "merchant_code", right_on = "mer_code", how = "left")
+df_errcat_nan.groupby(["bank_name_x", "bank_error_msg", "err_category"])["orders_count"].sum().to_csv("err_cat_nan.csv")
 
-df_tmp["biz_level_1"].fillna("网银自营")
-df_tmp["biz_level_2"].fillna("网银自营")
-df_tmp["biz_level_3"].fillna("网银自营")
+df_tmp = pd.merge(df_tmp, df_mer, left_on = "merchant_code", right_on = "mer_level_2nd_code", how = "left")
 
-df_tmp.to_csv("final.csv")
+df_tmp["owner"] = df_tmp["owner"].fillna("网银自营")
+df_tmp["biz_level_1"] = df_tmp["biz_level_1"].fillna("网银自营")
+df_tmp["biz_level_2"] = df_tmp["biz_level_2"].fillna("网银自营")
 
+# df_tmp.drop([""])
+# df_tmp.to_csv("final.csv")
+
+df_final = df_tmp.loc[:,["create_date_x", "interface_id", "channel_id", 
+	"cardtype", "bank_error_code", "bank_error_msg", "merchant_code", "bank_merchant_code", 
+	"money_section", "orders_amount_double", "orders_count_int", "bank_name_x", 
+	"err_category", "owner", "biz_level_1", "biz_level_2", "mer_name"]]
+	
+df_final.to_csv("final.csv")
 
 #print(df_tmp)
 
 # es = ExcelStorage("快捷失败数据_201609_mod.xlsx")
 # es.create(force = True)
-# es.write(fail_data = fail_data)
+# es.write(df_tmp.values)

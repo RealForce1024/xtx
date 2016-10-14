@@ -67,8 +67,18 @@ df_fail_data = df_fail_data.withColumn("orders_count_int", df_fail_data.orders_c
 
 df_tmp = df_fail_data.join(df_interid2bank_data, df_fail_data.interface_id == df_interid2bank_data.interface_id, how = "left")
 
-df_tmp = df_tmp.withColumn("bank_err_fkey", df_tmp.bank_name & "&" & df_tmp.bank_error_msg)
-print(df_tmp.show())
+rdd_tmp = df_tmp.rdd
+
+rdd_tmp = rdd_tmp.map(lambda x: x + (x.bank_name + "$" + x.bank_error_msg,))
+
+print(rdd_tmp.collect()[0])
+
+# print(rdd_tmp)
+
+
+# df_tmp = df_tmp.withColumn("bank_err_fkey", df_tmp.bank_name +  df_tmp.bank_error_msg)
+# print(df_tmp.show())
+
 # df_tmp = df_tmp.join(df_bankerr2regerr, df_tmp.bank_err_fkey == df_bankerr2regerr.bank_err_key, how = "left")
 
 # g = df_tmp.groupby(["err_category"]).agg({"orders_count_int":"sum"}).collect()
