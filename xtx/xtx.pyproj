@@ -26,17 +26,15 @@
     <Compile Include="data\DataSet.py" />
     <Compile Include="data\DataTable.py" />
     <Compile Include="data\__init__.py" />
+    <Compile Include="dependency\dependency.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="exceptions.py" />
-    <Compile Include="extractors\CSVExtractor.py" />
     <Compile Include="extractors\EmailExtractor.py" />
-    <Compile Include="extractors\ExcelExtractor.py" />
     <Compile Include="extractors\HtmlExtractor.py" />
     <Compile Include="extractors\__init__.py" />
     <Compile Include="gui\Main.py" />
     <Compile Include="gui\__init__.py" />
-    <Compile Include="loaders\ExcelLoader.py" />
-    <Compile Include="loaders\loader.py" />
-    <Compile Include="loaders\__init__.py" />
     <Compile Include="log\Logger.py" />
     <Compile Include="log\__init__.py" />
     <Compile Include="ml\kmeans.py" />
@@ -64,26 +62,19 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="storage\__init__.py" />
-    <Compile Include="transformers\Merger.py" />
-    <Compile Include="transformers\__init__.py" />
     <Compile Include="utils\file_utils.py" />
     <Compile Include="utils\__init__.py" />
-    <Compile Include="workflow\Action.py" />
-    <Compile Include="workflow\Flow.py" />
-    <Compile Include="workflow\__init__.py" />
     <Compile Include="__init__.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="data" />
     <Folder Include="extractors" />
     <Folder Include="gui" />
-    <Folder Include="loaders" />
     <Folder Include="log" />
     <Folder Include="ml" />
+    <Folder Include="dependency\" />
     <Folder Include="storage" />
-    <Folder Include="transformers" />
     <Folder Include="utils" />
-    <Folder Include="workflow" />
   </ItemGroup>
   <Import Project="$(PtvsTargetsFile)" Condition="Exists($(PtvsTargetsFile))" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="!Exists($(PtvsTargetsFile))" />
