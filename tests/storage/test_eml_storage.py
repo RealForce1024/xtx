@@ -16,7 +16,7 @@ class EmlStorageTest(Testing):
 		self.tmpdir = r"tests/data/tmp/"
 		self.classname = self.__class__.__name__
 		self.separator = "$"
-		self.ext = ".csv"
+		self.ext = ".eml"
 
 	def tearDown(self):
 		pass

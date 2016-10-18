@@ -47,6 +47,9 @@
     <Compile Include="storage\test_file_storage.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="storage\test_html_storage.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="storage\__init__.py">
       <SubType>Code</SubType>
     </Compile>
