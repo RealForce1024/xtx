@@ -7,18 +7,33 @@ import re
 from html.parser import HTMLParser
 
 from xtx.storage.text_file_storage import TextFileStorage
+from xtx.storage.exceptions import ArgumentsAbsenceError
 
 class HtmlStorage(TextFileStorage):
 
-	def __init__(self, filepath = None):
+	def __init__(self, filepath = None, content = None):
 		super().__init__(filepath)
+		self.content = content
 
 	def write(self, data, overwrite = True):
 		raise NotImplementedError
 
 	def read(self, limit = -1, encoding = "utf-8"):
-		raise NotImplementedError
+		htmlContent = None
+		if self.content is not None:
+			htmlContent = self.content
+		else:
+			if self.filepath is not None:
+				 with open(self.filepath, "r", encoding = encoding) as file:
+					 htmlContent = file.read()
+			else:
+				raise ArgumentsAbsenceError("The follow arguments must be specified one:  filepath=%s, content=%s" % \
+					(self.filepath, self.content))
 
+		htmlParser = SimpleHtmlParser()
+		htmlParser.feed(htmlContent)
+		tablesData = htmlParser.get_tables()
+		return tablesData
 	
 
 class RegExpHtmlParser(object):

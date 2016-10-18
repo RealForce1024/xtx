@@ -36,6 +36,9 @@
     <Compile Include="storage\test_csv_storage.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="storage\test_eml_storage.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="storage\test_excel_storage.py" />
     <Compile Include="storage\test_excel2007_storage.py" />
     <Compile Include="storage\test_excel2003_storage.py">
