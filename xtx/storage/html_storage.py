@@ -25,7 +25,7 @@ class HtmlStorage(TextFileStorage):
 		else:
 			if self.filepath is not None:
 				 with open(self.filepath, "r", encoding = encoding) as file:
-					 htmlContent = file.read()
+					htmlContent = file.read()
 			else:
 				raise ArgumentsAbsenceError("The follow arguments must be specified one:  filepath=%s, content=%s" % \
 					(self.filepath, self.content))

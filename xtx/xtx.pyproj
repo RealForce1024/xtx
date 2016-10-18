@@ -30,10 +30,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="exceptions.py" />
-    <Compile Include="extractors\EmailExtractor.py" />
-    <Compile Include="extractors\HtmlExtractor.py" />
-    <Compile Include="extractors\__init__.py" />
-    <Compile Include="gui\Main.py" />
+    <Compile Include="gui\main.py" />
     <Compile Include="gui\__init__.py" />
     <Compile Include="log\Logger.py" />
     <Compile Include="log\__init__.py" />
@@ -68,7 +65,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="data" />
-    <Folder Include="extractors" />
     <Folder Include="gui" />
     <Folder Include="log" />
     <Folder Include="ml" />

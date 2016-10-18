@@ -68,8 +68,17 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="data\" />
     <Folder Include="storage\" />
     <Folder Include="other_tests" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="data\test.csv" />
+    <Content Include="data\test.eml" />
+    <Content Include="data\test.html" />
+    <Content Include="data\test.xls" />
+    <Content Include="data\test.xlsx" />
+    <Content Include="data\test_create.csv" />
   </ItemGroup>
   <Import Project="$(PtvsTargetsFile)" Condition="Exists($(PtvsTargetsFile))" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="!Exists($(PtvsTargetsFile))" />
