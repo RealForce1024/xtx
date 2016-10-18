@@ -29,6 +29,7 @@
     <Compile Include="dependency\dependency.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="dependency\__init__.py" />
     <Compile Include="exceptions.py" />
     <Compile Include="gui\main.py" />
     <Compile Include="gui\__init__.py" />

@@ -3,18 +3,18 @@
 
 class DataRow(object):
 	
-	def __init__(self, data):
-		self.data = data if len(data) > 0 else []
+	def __init__(self, rowdata):
+		self.rowdata = rowdata if len(rowdata) > 0 else []
 		
-	def append(data):
-		self.data
+	def append(itemdata):
+		self.rowdata.append(itemdata)
 		
 	def get_data():
-		return self.data
+		return self.rowdata
 		
 	def get_data_by_index(index):
-		return self.data[index]
+		return self.rowdata[index]
 		
 	def remove_by_index(index):
-		pass
+		del self.rowdata[index]
 		
