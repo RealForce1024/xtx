@@ -17,4 +17,7 @@ class DataRow(object):
 		
 	def remove_by_index(index):
 		del self.rowdata[index]
+
+	def __getter__(self, name):
+		return super().__getattribute__(**kwargs)
 		

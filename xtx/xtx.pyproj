@@ -21,10 +21,10 @@
     <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="data\DataColumn.py" />
-    <Compile Include="data\DataRow.py" />
-    <Compile Include="data\DataSet.py" />
-    <Compile Include="data\DataTable.py" />
+    <Compile Include="data\datacolumn.py" />
+    <Compile Include="data\datarow.py" />
+    <Compile Include="data\dataset.py" />
+    <Compile Include="data\datatable.py" />
     <Compile Include="data\__init__.py" />
     <Compile Include="dependency\dependency.py">
       <SubType>Code</SubType>

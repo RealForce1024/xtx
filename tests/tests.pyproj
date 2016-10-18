@@ -23,6 +23,12 @@
     <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="data_module\test_datarow.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="data_module\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="other_tests\test_class_define.py" />
     <Compile Include="other_tests\test_decorator.py" />
     <Compile Include="other_tests\test_list_add_remove.py">
@@ -69,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="data\" />
+    <Folder Include="data_module\" />
     <Folder Include="storage\" />
     <Folder Include="other_tests" />
   </ItemGroup>
